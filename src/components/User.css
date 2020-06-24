@@ -1,0 +1,5 @@
+.child-user {
+    flex: 1 0 21%; /* explanation below */
+    margin: 5px;
+    margin-bottom: 20px;
+  }
