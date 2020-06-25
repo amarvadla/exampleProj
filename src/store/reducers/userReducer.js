@@ -1,4 +1,4 @@
-import * as actionTypes from './action';
+import * as actionTypes from '../actions/actionTypes';
 
 const intialState = {
     profile: [
@@ -8,18 +8,20 @@ const intialState = {
     ]
 }
 
+
+const addUserFunction = (state, action) => {
+    return {
+        ...state,
+        profile: [...state.profile, action.user]
+    }
+}
+
+
 const reducer = (state = intialState, action) => {
 
-    console.log(action)
-
     switch (action.type) {
-        case actionTypes.ADD_USER:
-            return {
-                ...state,
-                profile: [...state.profile, action.user]
-            }
-        default:
-            return state;
+        case actionTypes.ADD_USER: return addUserFunction(state, action)
+        default: return state;
     }
 
 }

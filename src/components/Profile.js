@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
-import * as actionTypes from '../store/action';
+import * as userActions from '../store/actions';
 
 class Profile extends Component {
 
@@ -31,6 +31,7 @@ class Profile extends Component {
         }
         this.props.onUserProfileAdded(user);
         this.form.reset();
+        this.props.history.push('/home')
     }
 
     render() {
@@ -62,8 +63,7 @@ class Profile extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserProfileAdded: (userProfile) => dispatch({ type: actionTypes.ADD_USER, user: userProfile }),
-        onUserProfileRemoved: (userProfile) => dispatch({ type: actionTypes.REMOVE_USER, user: userProfile }),
+        onUserProfileAdded: (userProfile) => dispatch(userActions.addUser(userProfile)),
     }
 }
 

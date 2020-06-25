@@ -3,7 +3,6 @@ import User from './User'
 import './Home.css'
 import UserProfile from './UserProfile';
 import { connect } from 'react-redux';
-import * as actionTypes from '../store/action';
 
 class Home extends Component {
 
@@ -62,8 +61,7 @@ class Home extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserProfileAdded: (userProfile) => dispatch({ type: actionTypes.ADD_USER, user: userProfile }),
-        onUserProfileRemoved: (userProfile) => dispatch({ type: actionTypes.REMOVE_USER, user: userProfile }),
+        
     }
 }
 
