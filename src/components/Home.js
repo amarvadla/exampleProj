@@ -3,6 +3,7 @@ import User from './User'
 import './Home.css'
 import UserProfile from './UserProfile';
 import { connect } from 'react-redux';
+import * as actions from '../store/actions';
 
 class Home extends Component {
 
@@ -23,6 +24,9 @@ class Home extends Component {
 
     }
 
+    componentDidMount() {
+        this.props.intializeUsers();
+    }
 
     render() {
 
@@ -61,13 +65,13 @@ class Home extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        
+        intializeUsers: () => dispatch(actions.initUsers())
     }
 }
 
 const mapStateToProps = state => {
     return {
-        userProfiles: state.profile
+        userProfiles: state.allUsers
     }
 }
 

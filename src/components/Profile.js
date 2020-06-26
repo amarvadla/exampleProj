@@ -27,11 +27,10 @@ class Profile extends Component {
             'name': this.state.name,
             'age': this.state.age,
             'about': this.state.about,
-            'profileImage': 'https://moonvillageassociation.org/wp-content/uploads/2018/06/default-profile-picture1.jpg'
+            'profileImage': 'https://www.cochawaii.org/wp-content/uploads/avt.jpg'
         }
         this.props.onUserProfileAdded(user);
         this.form.reset();
-        this.props.history.push('/home')
     }
 
     render() {
@@ -63,7 +62,7 @@ class Profile extends Component {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onUserProfileAdded: (userProfile) => dispatch(userActions.addUser(userProfile)),
+        onUserProfileAdded: (userProfile) => dispatch(userActions.addNewUser(userProfile)),
     }
 }
 
