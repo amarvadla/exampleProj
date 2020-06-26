@@ -9,7 +9,8 @@ class Profile extends Component {
         name: '',
         age: '',
         about: '',
-        profileImage: ''
+        profileImage: '',
+        validated: false
     }
 
     handleChange = (event) => {
@@ -22,35 +23,67 @@ class Profile extends Component {
 
 
     handleSubmit = (event) => {
-        event.preventDefault();
-        let user = {
-            'name': this.state.name,
-            'age': this.state.age,
-            'about': this.state.about,
-            'profileImage': 'https://www.cochawaii.org/wp-content/uploads/avt.jpg'
+        const form = event.currentTarget;
+
+        console.log(form.checkValidity());
+
+        if (form.checkValidity() === false) {
+            event.stopPropagation();
+            this.setState({
+                validated: true
+            })
+        } else {
+            let user = {
+                'name': this.state.name,
+                'age': this.state.age,
+                'about': this.state.about,
+                'profileImage': 'https://www.cochawaii.org/wp-content/uploads/avt.jpg'
+            }
+            this.props.onUserProfileAdded(user);
+            this.form.reset();
+            this.setState({
+                validated: false
+            })
         }
-        this.props.onUserProfileAdded(user);
-        this.form.reset();
+
+        event.preventDefault();
+
     }
 
     render() {
         return (
             <div>
-                <Form style={{ marginLeft: '200px', marginRight: '200px' }} ref={form => this.form = form}>
+                <Form style={{ marginLeft: '50px', marginTop: "30px", width: "50%" }}
+                    ref={form => this.form = form} noValidate
+                    validated={this.state.validated} onSubmit={this.handleSubmit}>
                     <Form.Group controlId="formBasicName">
                         <Form.Label>Name</Form.Label>
-                        <Form.Control name="name" type="text" placeholder="Enter Name" onChange={this.handleChange} />
+                        <Form.Control name="name" type="text" required
+                            placeholder="Enter Name" onChange={this.handleChange} />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide the name.
+                        </Form.Control.Feedback>
                     </Form.Group>
 
                     <Form.Group controlId="formBasicAge">
                         <Form.Label>Age</Form.Label>
-                        <Form.Control name="age" type="number" placeholder="Age" onChange={this.handleChange} />
+                        <Form.Control name="age" type="number"
+                            required
+                            placeholder="Enter Age" onChange={this.handleChange} />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide the age.
+                        </Form.Control.Feedback>
                     </Form.Group>
                     <Form.Group controlId="exampleForm.ControlTextarea1">
                         <Form.Label>About</Form.Label>
-                        <Form.Control name="about" as="textarea" rows="3" onChange={this.handleChange} />
+                        <Form.Control name="about" as="textarea" rows="3"
+                            required
+                            onChange={this.handleChange} />
+                        <Form.Control.Feedback type="invalid">
+                            Please provide about.
+                        </Form.Control.Feedback>
                     </Form.Group>
-                    <Button variant="primary" type="submit" onClick={this.handleSubmit}>
+                    <Button variant="primary" type="submit">
                         Submit
                     </Button>
                 </Form>

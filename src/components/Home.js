@@ -35,10 +35,8 @@ class Home extends Component {
 
         if (this.state.isProfileClicked) {
 
-            this.props.userProfiles.map((user) => {
-                if (user.name === this.state.profileName) {
-                    selectedUser = user;
-                }
+            selectedUser = this.props.userProfiles.find((element) => {
+                return selectedUser = element;
             })
 
             userProfile = <UserProfile
@@ -51,7 +49,7 @@ class Home extends Component {
             <div className="container">
                 {
                     this.props.userProfiles.map((user) => {
-                        return <User name={user.name} age={user.age} about={user.about}
+                        return <User key={user.id} name={user.name} age={user.age} about={user.about}
                             profileImage={user.profileImage}
                             clickVisit={this.visitProfileClickListener}></User>
                     })

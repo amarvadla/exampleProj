@@ -17,9 +17,16 @@ export const initTheUsers = (users) => {
 
 export const addNewUser = (user) => {
     return dispatch => {
-        dispatch(addUser(user));
-        axios.post('/allUsers.json', user).then((reponse) => {
-            console.log(reponse);
+
+        axios.post('/allUsers.json', user).then((response) => {
+
+            var userAdd = {
+                ...user,
+                id: response.data.name
+            }
+
+            dispatch(addUser(userAdd));
+
         }).catch((e) => {
             console.log(e);
         })
@@ -35,14 +42,13 @@ export const initUsers = () => {
 
             const users = keys.map((index) => {
                 return {
+                    id: index,
                     name: response.data[index].name,
                     age: response.data[index].age,
                     about: response.data[index].about,
                     profileImage: response.data[index].profileImage,
                 }
             })
-            console.log(response);
-
 
             return disptach(initTheUsers(users));
 
