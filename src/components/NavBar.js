@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
 import { Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux';
+import * as userActions from '../store/actions';
 
 class NavigatorBar extends Component {
+
+
+    handleLogout = () => {
+
+        this.props.onLogout();
+    }
 
     render() {
         return (
@@ -22,8 +30,7 @@ class NavigatorBar extends Component {
                         </NavDropdown>
                     </Nav>
                     <Form inline>
-                        <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                        <Button variant="outline-success">Search</Button>
+                        <Button onClick={this.handleLogout}>Log Out</Button>
                     </Form>
                 </Navbar.Collapse>
             </Navbar>
@@ -32,4 +39,10 @@ class NavigatorBar extends Component {
 
 }
 
-export default NavigatorBar;
+const mapDispatchToProps = dispatch => {
+    return {
+        onLogout: () => dispatch(userActions.logOutUser())
+    };
+};
+
+export default connect(null, mapDispatchToProps)(NavigatorBar);

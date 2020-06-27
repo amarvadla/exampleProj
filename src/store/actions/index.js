@@ -1,1 +1,1 @@
-export { initUsers, addNewUser } from './userAction';
+export { initUsers, addNewUser, authenticate, checkAuth, logOutUser } from './userAction';

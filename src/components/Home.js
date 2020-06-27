@@ -69,7 +69,7 @@ const mapDispatchToProps = dispatch => {
 
 const mapStateToProps = state => {
     return {
-        userProfiles: state.allUsers
+        userProfiles: state.allUsers,
     }
 }
 
