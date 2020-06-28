@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Spinner } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import * as userActions from '../store/actions';
 import './Login.css';
@@ -11,7 +11,8 @@ class Login extends Component {
         email: '',
         password: '',
         validated: false,
-        isSignUp: false
+        isSignUp: false,
+        submit: false
     }
 
     handleChange = (event) => {
@@ -34,6 +35,11 @@ class Login extends Component {
                 validated: true
             })
         } else {
+
+            this.setState({
+                submit: true
+            })
+
             let user = {
                 'email': this.state.email,
                 'password': this.state.password
@@ -60,6 +66,15 @@ class Login extends Component {
     }
 
     render() {
+
+        let spinner = <Spinner
+            as="span"
+            animation="border"
+            size="sm"
+            role="status"
+            aria-hidden="true"
+        />
+
         return (
             <div className="form-login">
 
@@ -90,6 +105,7 @@ class Login extends Component {
                         </h4>
                     </Form.Group>
                     <Button variant="primary" type="submit">
+                        {this.state.submit ? spinner : null}
                         {this.state.isSignUp ? "Sign Up" : "Sign In"}
                     </Button>
                 </Form>
